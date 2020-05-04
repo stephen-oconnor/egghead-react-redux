@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.todo-app {
+  padding-top: 20px;
+  display: inline-block;
+  text-align: left;
+}
+
+input {
+  font-size: 20px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
