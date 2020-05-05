@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 const TodoItem = ({ id, name, isComplete }) => {
 	return (
@@ -9,7 +10,7 @@ const TodoItem = ({ id, name, isComplete }) => {
 	);
 };
 
-export default function TodoList({ todos }) {
+const TodoList = ({ todos }) => {
 	return (
 		<div className="todo-list">
 			<ul>
@@ -19,4 +20,9 @@ export default function TodoList({ todos }) {
 			</ul>
 		</div>
 	);
-}
+};
+
+// Map slices of state (todos, currentTodo) to props of connected component. Available on props.
+const mapStateToProps = (state) => ({ todos: state.todos });
+
+export default connect(mapStateToProps)(TodoList);
