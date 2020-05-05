@@ -8,12 +8,12 @@
     {
       "id": 2,
       "name": "start server",
-      "isComplete": false
+      "isComplete": true
     },
     {
       "id": 3,
       "name": "Load data into app",
-      "isComplete": false
+      "isComplete": true
     },
     {
       "id": 4,
@@ -24,21 +24,6 @@
       "id": 5,
       "name": "update records",
       "isComplete": false
-    },
-    {
-      "name": "dsadsa",
-      "isComplete": false,
-      "id": 6
-    },
-    {
-      "name": "New todo",
-      "isComplete": false,
-      "id": 7
-    },
-    {
-      "name": "Another todo",
-      "isComplete": false,
-      "id": 8
     }
   ]
 }

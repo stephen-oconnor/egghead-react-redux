@@ -28,7 +28,7 @@ class TodoForm extends Component {
 }
 
 // Map slices of state (todos, currentTodo) to props of connected component. Available on props.
-const mapStateToProps = (state) => ({ currentTodo: state.currentTodo });
+const mapStateToProps = (state) => ({ currentTodo: state.todo.currentTodo });
 
 // Bind action creators to dispatch. Available on props.
 const mapDispatchToProps = { updateCurrent, saveTodo };

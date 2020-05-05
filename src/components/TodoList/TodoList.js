@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchTodos } from "../../reducers/todo";
+import { fetchTodos, toggleTodo, deleteTodo } from "../../reducers/todo";
 
-const TodoItem = ({ name, isComplete }) => {
+const TodoItem = ({ id, name, isComplete, toggleTodo, deleteTodo }) => {
 	return (
 		<li>
-			<input type="checkbox" defaultChecked={isComplete} />
+			<span className="delete-item">
+				<button onClick={() => deleteTodo(id)}>X</button>
+			</span>
+			<input
+				type="checkbox"
+				checked={isComplete}
+				onChange={() => toggleTodo(id)}
+			/>
 			{name}
 		</li>
 	);
@@ -21,7 +28,12 @@ class TodoList extends Component {
 			<div className="todo-list">
 				<ul>
 					{this.props.todos.map((todo) => (
-						<TodoItem key={todo.id} {...todo} />
+						<TodoItem
+							key={todo.id}
+							toggleTodo={this.props.toggleTodo}
+							deleteTodo={this.props.deleteTodo}
+							{...todo}
+						/>
 					))}
 				</ul>
 			</div>
@@ -30,9 +42,9 @@ class TodoList extends Component {
 }
 
 // Map slices of state (todos, currentTodo) to props of connected component. Available on props.
-const mapStateToProps = (state) => ({ todos: state.todos });
+const mapStateToProps = (state) => ({ todos: state.todo.todos });
 
 // Bind action creators to dispatch. Available on props.
-const mapDispatchToProps = { fetchTodos };
+const mapDispatchToProps = { fetchTodos, toggleTodo, deleteTodo };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
