@@ -1,26 +1,36 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateCurrent } from "../../reducers/todo";
+import { updateCurrent, saveTodo } from "../../reducers/todo";
 
-const TodoForm = (props) => {
-	const { currentTodo, updateCurrent } = props;
-
-	const handleInputChange = (event) => {
-		const value = event.target.value;
-		updateCurrent(value);
+class TodoForm extends Component {
+	handleInputChange = (event) => {
+		this.props.updateCurrent(event.target.value);
 	};
 
-	return (
-		<form>
-			<input type="text" value={currentTodo} onChange={handleInputChange} />
-		</form>
-	);
-};
+	handleSubmit = (event) => {
+		event.preventDefault();
+		this.props.saveTodo(this.props.currentTodo);
+	};
+
+	render() {
+		const { currentTodo } = this.props;
+
+		return (
+			<form onSubmit={this.handleSubmit}>
+				<input
+					type="text"
+					value={currentTodo}
+					onChange={this.handleInputChange}
+				/>
+			</form>
+		);
+	}
+}
 
 // Map slices of state (todos, currentTodo) to props of connected component. Available on props.
 const mapStateToProps = (state) => ({ currentTodo: state.currentTodo });
 
 // Bind action creators to dispatch. Available on props.
-const mapDispatchToProps = { updateCurrent };
+const mapDispatchToProps = { updateCurrent, saveTodo };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoForm);
