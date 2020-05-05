@@ -78,6 +78,18 @@ export const deleteTodo = (id) => {
 	};
 };
 
+// Selector function.
+export const getVisibleTodos = (todos, filter) => {
+	switch (filter) {
+		case "active":
+			return todos.filter((t) => !t.isComplete);
+		case "completed":
+			return todos.filter((t) => t.isComplete);
+		default:
+			return todos;
+	}
+};
+
 // Reducer function.
 export default (state = initState, action) => {
 	switch (action.type) {

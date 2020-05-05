@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchTodos, toggleTodo, deleteTodo } from "../../reducers/todo";
+import {
+	fetchTodos,
+	toggleTodo,
+	deleteTodo,
+	getVisibleTodos,
+} from "../../reducers/todo";
 
 const TodoItem = ({ id, name, isComplete, toggleTodo, deleteTodo }) => {
 	return (
@@ -42,7 +47,9 @@ class TodoList extends Component {
 }
 
 // Map slices of state (todos, currentTodo) to props of connected component. Available on props.
-const mapStateToProps = (state) => ({ todos: state.todo.todos });
+const mapStateToProps = (state, ownProps) => ({
+	todos: getVisibleTodos(state.todo.todos, ownProps.filter),
+});
 
 // Bind action creators to dispatch. Available on props.
 const mapDispatchToProps = { fetchTodos, toggleTodo, deleteTodo };
